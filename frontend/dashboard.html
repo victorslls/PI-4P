@@ -319,7 +319,25 @@
         </div>
     </div>
 
+    <button onclick="logout()" style="position:fixed;top:20px;right:20px;z-index:999;background:#ef4444;color:white;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;">
+  Sair
+</button>
+
     <script>
+
+
+        // Protege o dashboard - só admin logado acessa
+        if (localStorage.getItem("adminLogado") !== "true") {
+            window.location.href = "login.html";
+        }
+
+        // Botão de logout (opcional)
+        function logout() {
+            localStorage.removeItem("adminLogado");
+            localStorage.removeItem("adminEmail");
+            window.location.href = "login.html";
+        }
+
         // Dados para o gráfico
         let dadosGrafico = {
             labels: [],
@@ -494,6 +512,8 @@
 
         setInterval(buscarDados, 3000);
         buscarDados();
+
+
     </script>
 </body>
 
